@@ -3,7 +3,7 @@ require 'test/unit'
 require 'rubygems'
 require 'activerecord'
 
-ActiveRecord::Base.establish_connection({"adapter" => "sqlite3", "database" => 'test.sqlite3'})
+ActiveRecord::Base.establish_connection({"adapter" => defined?(JRUBY_VERSION) ? "jdbcsqlite3":"sqlite3", "database" => 'test.sqlite3'})
 begin
   ActiveRecord::Base.connection.execute("drop table mock_records");
 rescue
@@ -14,7 +14,6 @@ require File.dirname(__FILE__) + '/../init.rb'
 
 class MockRecord < ActiveRecord::Base
   include AfterCommit::ActiveRecord
-  
   attr_accessor :after_commit_on_create_called, :after_commit_on_update_called, :after_commit_on_destroy_called
 
   def after_commit_on_create
