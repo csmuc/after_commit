@@ -1,0 +1,5 @@
+after_commit_on_create|update|destory callbacks for ActiveRecord models.
+
+Based on:
+http://github.com/GUI/after_commit/tree/master
+http://github.com/freelancing-god/thinking-sphinx
