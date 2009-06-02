@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   #s.extra_rdoc_files = ['README.rdoc', 'LICENSE', 'CHANGELOG']
   # s.add_dependency 'actionpack', ['>= 1.13.6']
   
-  s.files = %w(README.rdoc test/after_commit_test.rb lib/after_commit.rb)
+  s.files = %w(README test/after_commit_test.rb lib/after_commit.rb)
   s.test_files = %w(test/after_commit_test.rb)
 end
