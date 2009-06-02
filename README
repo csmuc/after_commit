@@ -2,6 +2,7 @@ after_commit
 ============
 
 After_commit enables you to add after_commit methods to ActiveRecord models, which are called once the transaction has been committed to the database.
+
 Typically one needs this in asynchronous processing where you pass on IDs of new records to another thread or post them to a message queue. Using the stock after_XXX
 callbacks you cannot be sure that the other thread/process is already seeing the new record (at least if the database is ACID compliant).
 
@@ -33,7 +34,7 @@ You have to explicitely define the methods like in the example above, something 
 
 Credits:
 ========
-I've take existing code and basically made it threadsafe (hopefully, so it should be safe when running config.threadsafe!). Sources are:
+I've taken existing code and made it threadsafe (well hopefully, so it should be safe when running config.threadsafe!). Original sources:
 
 http://github.com/GUI/after_commit/tree/master
 http://github.com/freelancing-god/thinking-sphinx
