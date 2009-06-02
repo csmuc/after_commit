@@ -1,5 +1,40 @@
-after_commit_on_create|update|destory callbacks for ActiveRecord models.
+after_commit
+============
 
-Based on:
+After_commit enables you to add after_commit methods to ActiveRecord models, which are called once the transaction has been committed to the database.
+Typically one needs this in asynchronous processing where you pass on IDs of new records to another thread or post them to a message queue. Using the stock after_XXX
+callbacks you cannot be sure that the other thread/process is already seeing the new record (at least if the database is ACID compliant).
+
+
+Usage:
+======
+
+class Blog < ActiveRecord::Base
+  include AfterCommit::ActiveRecord
+  
+  def after_commit_on_create
+    # do something
+  end
+
+  def after_commit_on_update
+    # do something
+  end
+
+  def after_commit_on_destroy
+    # do something
+  end
+end
+
+
+You have to include AfterCommit::ActiveRecord to add the new callbacks. They aren't automatically added to ActiveRecord::Base as tracking the committed
+records takes a little overhead and I thought it's better to be able to manually select which models should get that feature.
+  
+You have to explicitely define the methods like in the example above, something like after_commit_on_create :do_what_ever doesn't work.
+
+Credits:
+========
+I've take existing code and basically made it threadsafe (hopefully, so it should be safe when running config.threadsafe!). Sources are:
+
 http://github.com/GUI/after_commit/tree/master
 http://github.com/freelancing-god/thinking-sphinx
+
